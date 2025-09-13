@@ -1,0 +1,47 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ecommerce-store-backend
+
+  profiles:
+    active: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce_store
+    username: postgres
+    password: ${DB_PASSWORD:your_actual_password_here}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    open-in-view: false                    # Disable JPA open-in-view (best practice)
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  # Disable security auto-configuration warnings
+  security:
+    user:
+      name: admin                          # Remove generated password warning
+      password: temp123                    # Temporary password (we'll remove this later)
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,loggers
+  endpoint:
+    health:
+      show-details: when-authorized
+
+logging:
+  level:
+    root: INFO
+    com.ecommerce.store: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: INFO
