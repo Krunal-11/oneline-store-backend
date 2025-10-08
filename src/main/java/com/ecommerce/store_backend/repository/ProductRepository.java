@@ -1,4 +1,11 @@
 package com.ecommerce.store_backend.repository;
 
-public class ProductRepository {
+import com.ecommerce.store_backend.entity.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.UUID;
+
+public interface ProductRepository extends JpaRepository<Product, UUID> {
+    List<Product> findByProductGroupId(UUID productGroupId);
 }
